@@ -22,5 +22,5 @@
 
 ## Oliver Work
 - 1. make/design website in React
-- 2. rate subreddits
+- 2. rate subreddits on how political/left-right leaning for colouring/insulated level calculation
 - 3. make political compass survey

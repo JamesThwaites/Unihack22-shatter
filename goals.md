@@ -20,3 +20,7 @@
 - entry box where you can type in subreddit names and add them
 - list of added subreddits that allows you to delete unwanted ones
 
+## Oliver Work
+- 1. make/design website in React
+- 2. rate subreddits
+- 3. make political compass survey

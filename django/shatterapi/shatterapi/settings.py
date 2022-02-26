@@ -77,10 +77,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'subredditdb',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'USER': 'hugo',
+        'PASSWORD': '!U9t7&40Qclt@U9&Attb', # this is literally the password
+        'HOST': '104.198.96.128',
+        #'PORT': '',
     }
 }
 

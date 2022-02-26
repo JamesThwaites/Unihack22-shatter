@@ -1,14 +1,1 @@
-{
-    "similarities" : [
-        {
-            "subreddit_1" : "news",
-            "subreddit_2" : "interesting",
-            "similarity" : 90
-        },
-        {
-            "subreddit_1" : "news",
-            "subreddit_2" : "pets",
-            "similarity" : 60
-        }
-    ]
-}
+{"similarities": [{"subreddit_1": "news", "subreddit_2": "interesting", "similarity": 90}, {"subreddit_1": "news", "subreddit_2": "pets", "similarity": 60}]}

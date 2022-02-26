@@ -1,0 +1,51 @@
+{
+    "nodes": [
+        {
+            "id": 6,
+            "name": "Awesome",
+            "size": 8
+        },
+        {
+            "id": 4,
+            "name": "Epic",
+            "size": 800000
+        },
+        {
+            "id": 1,
+            "name": "News",
+            "size": 80000000
+        },
+        {
+            "id": 3,
+            "name": "Fantasy",
+            "size": 8000
+        },
+        {
+            "id": 4,
+            "name": "Cool",
+            "size": 8000000
+        }
+    ],
+    "links": [
+        {
+            "source": 6,
+            "target": 3,
+            "similarity": 10
+        },
+        {
+            "source": 6,
+            "target": 1,
+            "similarity": 10
+        },
+        {
+            "source": 3,
+            "target": 1,
+            "similarity": 100
+        },
+        {
+            "source": 3,
+            "target": 4,
+            "similarity": 40
+        }
+    ]
+}

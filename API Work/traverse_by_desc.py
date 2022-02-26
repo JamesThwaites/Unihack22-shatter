@@ -232,7 +232,7 @@ def iterBackward(links, origin):
     return next_iter
 
 
-print(findLinks('teachers','military'))
+print(findLinks('jokes','tifu'))
 
 #subredditReport('news')
 

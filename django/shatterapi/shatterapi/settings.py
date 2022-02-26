@@ -16,17 +16,16 @@ import configparser
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Load this from .gitignore config file 
 configFile = configparser.ConfigParser()
-configFile.read("config.ini")
-secretKey = config['SECRET']
+configFileAddress = BASE_DIR / 'config.ini'
+configFile.read(configFileAddress)
 
-SECRET_KEY = secretKey["secret"]
+SECRET_KEY = configFile['SECRET']["secret"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,7 +83,7 @@ databaseConfig = configFile['DATABASE']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'subredditdb',
+        'NAME': databaseConfig['dbname'],
         'USER': databaseConfig["user"],
         'PASSWORD': databaseConfig["pass"], 
         'HOST': databaseConfig["host"], 

@@ -1,4 +1,4 @@
-import praw, re, json, prawcore, copy
+import praw, re, json, prawcore, copy, random, numpy
 from pmaw import PushshiftAPI
 
 api = PushshiftAPI()
@@ -16,17 +16,14 @@ subreddit_sizes = {}
 
 subreddit_list = [key for key in stored_descs]
 
-count = 1
+count = 0
 TOTAL = len(subreddit_list)
 csv = open('subreddits.csv', 'w')
 
 for sub in subreddit_list:
-    try:
-        csv.write(sub)
-    except UnicodeEncodeError:
-        pass
+    subcount =  random.randrange(8000,50000000)
+    subreddit_sizes[sub] = subcount
     
-    csv.write(',')
 
     '''
     try:
@@ -47,12 +44,10 @@ for sub in subreddit_list:
     '''
 
 
-    count += 0
-    #print(f'{sub}: {subcount}   ---   Remaining: {TOTAL - count}')
+    count += 1
+    print(f'{sub}: {subcount}   ---   Remaining: {TOTAL - count}')
 
-csv.close()
 
-'''
+
 with open('subreddit_sizes.json', 'w') as subsizes:
     json.dump(subreddit_sizes, subsizes, indent=2)
-'''

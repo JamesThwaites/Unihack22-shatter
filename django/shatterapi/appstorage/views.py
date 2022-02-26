@@ -19,6 +19,6 @@ def client(request):
 
     if request.method == 'GET':
         # Will actually spit out the return value
-    #
+        pass
 
     return HttpResponse("hello world")

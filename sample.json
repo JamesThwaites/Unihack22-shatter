@@ -1,10 +1,14 @@
 {
-    "10" :
-    {
-        "sub_name": "news",
-        "similarities": {
-            "1": 99.0,
-            "2": 85.0
+    "similarities" : [
+        {
+            "subreddit_1" : "news",
+            "subreddit_2" : "interesting",
+            "similarity" : 90
+        },
+        {
+            "subreddit_1" : "news",
+            "subreddit_2" : "pets",
+            "similarity" : 60
         }
-    }
+    ]
 }

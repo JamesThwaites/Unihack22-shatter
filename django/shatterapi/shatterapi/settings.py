@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import configparser
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--sad2ct8%02b4*czb3#sjrp$%jscqxti!$kcmgx-f4yip4@d#j'
+# Load this from .gitignore config file 
+configFile = configparser.ConfigParser()
+configFile.read("config.ini")
+secretKey = config['SECRET']
+
+SECRET_KEY = secretKey["secret"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,13 +79,15 @@ WSGI_APPLICATION = 'shatterapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+databaseConfig = configFile['DATABASE']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'subredditdb',
-        'USER': 'hugo',
-        'PASSWORD': '!U9t7&40Qclt@U9&Attb', # this is literally the password
-        'HOST': '104.198.96.128',
+        'USER': databaseConfig["user"],
+        'PASSWORD': databaseConfig["pass"], 
+        'HOST': databaseConfig["host"], 
         #'PORT': '',
     }
 }

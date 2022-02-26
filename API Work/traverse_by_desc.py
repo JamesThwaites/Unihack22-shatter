@@ -231,8 +231,8 @@ def iterBackward(links, origin):
 
     return next_iter
 
-
-print(findLinks('jokes','tifu'))
+if __name__ == '__main__':
+    print(findLinks('jokes','tifu'))
 
 #subredditReport('news')
 

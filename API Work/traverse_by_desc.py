@@ -148,7 +148,7 @@ def findLinks(sub1, sub2):
     actual_links = []
     found_links = []
     depth = 0
-    while depth < 3:
+    while depth < 2:
         found_path = []
         forward_links = iterForward(forward_links, sub1)
         for link in forward_links:

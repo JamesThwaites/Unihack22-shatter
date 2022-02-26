@@ -4,3 +4,9 @@
 - whenever a new sub is added, generate similarities to all previously added subs
 
 ### Similarity Criteria
+- parent?
+- child?
+- sibling?
+- etc?
+- number of connecting routes
+- type of connection

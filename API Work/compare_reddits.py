@@ -250,4 +250,4 @@ def compareSubList(sub_list):
     
 #compareSubList('fantasy,books,scifi')
     
-compareSubList(gen_random_subs.gen(10))
+compareSubList(gen_random_subs.gen(20))

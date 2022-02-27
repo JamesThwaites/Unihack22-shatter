@@ -1,26 +1,57 @@
-var data = {"nodes" : [{"id" : 6, "name" : "Awesome", "size" : 8}, 
-{"id" : 4, "name" : "Epic", "size" : 800000}, 
+var data = {"nodes" : [ {"id" : 4, "name" : "Epic", "size" : 800000}, 
 {"id" : 1, "name" : "News", "size" : 80000000}, 
 {"id" : 3, "name" : "Fantasy", "size" : 8000}, 
 {"id" : 2, "name" : "Cool", "size" : 8000000},
 {"id" : 5, "name" : "H", "size" : 7837234},
-{"id" : 7, "name" : "Flipping Cool", "size" : 45},
+{"id" : 7, "name" : "Cool 2.0", "size" : 45},
 {"id" : 8, "name" : "CoolBeans", "size" : 5643},
 {"id" : 9, "name" : "GgGg", "size" : 98888}],
-"links" : [{"source": 6, "target": 1, "similarity" : 10}, 
-{"source": 3, "target": 1, "similarity" : 100}, 
+"links" : [ {"source": 3, "target": 1, "similarity" : 100}, 
 {"source": 3, "target": 4, "similarity" : 40},
 {"source": 9, "target": 2, "similarity" : 35},
 {"source": 7, "target": 8, "similarity" : 74},
-{"source": 3, "target": 5, "similarity" : 96},
-{"source": 5, "target": 6, "similarity" : 56}]}
+{"source": 3, "target": 5, "similarity" : 1},
+{"source": 2, "target": 1, "similarity" : 63}
+]}
+
+function calculateInsularity(d) {
+
+    var totalSubreddits = d.nodes.length;
+    var totalLinks = d.links.length;
+    var totalSimilarity = 0;
+
+    for (var i in d.links) {
+        totalSimilarity += d.links[i].similarity;
+    }
+
+    var AverageLinkSimilarity = (totalSimilarity/totalLinks);
+
+    return (totalLinks/totalSubreddits) * AverageLinkSimilarity
+}
+
+var insularity = calculateInsularity(data)
+var height = 500
+var width = 500
+var r = 10
 
 var svg = d3.select("#DataVis")
     .append("svg")
-    .attr("width", 800)
-    .attr("height", 800)
+    .attr("width", width)
+    .attr("height", height)
     .attr("transform", "translate(100, 100)")
-    .style("border", "1px solid black")
+    //.style("border", "1px solid #ADD8E6")
+
+svg.append("text")
+    .attr("x", (width / 2))             
+    .attr("y", (10))
+    .attr("text-anchor", "middle")  
+    .style("font-size", "10px") 
+    .text("You are " + insularity + "% insulated");
+
+// svg.append("rect")
+//     .attr("width", "100%")
+//     .attr("height", "100%")
+//     .attr("fill", "#ADD8E6");
 
 // var tooltip = d3.select("#DataVis")
 //     .append("div")					
@@ -29,10 +60,12 @@ var svg = d3.select("#DataVis")
 
 var simulation = d3
     .forceSimulation(data.nodes)
-    .force("link", d3.forceLink(data.links).id(function(d) { return d.id; }).distance(60))
+    .force("link", d3.forceLink(data.links)
+        .id(function(d) { return d.id; })
+        .distance( function(d) {return (150 - d.similarity); } ))
     .force("charge", d3.forceManyBody().strength(-30))
-    .force("center", d3.forceCenter(400, 400))
-    .force("collide", d3.forceCollide().radius(20))
+    .force("center", d3.forceCenter(height/2, width/2))
+    .force("collide", d3.forceCollide().radius(5))
     .on("tick", ticked);
 
 var showSims = function(d) {
@@ -76,7 +109,8 @@ var simValues = svg.append('g')
         .text(d => d.similarity/100)
         .attr('font-size', 8)
         .attr("font-weight", "bold")
-        .attr("text-anchor", "middle")
+        .attr("text-anchor", "bottom")
+        .style("fill", "black")
 
 var links = svg
     .append("g")
@@ -97,8 +131,8 @@ var nodes = svg
     .data(data.nodes)
     .enter()
     .append("circle")
-    .attr("r", function(d) {return (Math.log(d.size))})
-    .attr("fill", "#ADD8E6")
+    .attr("r", r)
+    .attr("fill", "#ff6961")
     .on("mouseover", showNodeNames)
     .on("mouseleave", hideNodeNames)
     .call(drag(simulation));
@@ -106,10 +140,10 @@ var nodes = svg
 function ticked() {
     nodes
         .attr("cx", function(d) {
-            return d.x;
+            return d.x = Math.max((r+1), Math.min(width - (r+1), d.x));
         })
         .attr("cy", function(d) {
-            return d.y;
+            return d.y = Math.max((r+1), Math.min(height - (r+1), d.y));
         })
     
     links
@@ -131,13 +165,13 @@ function ticked() {
             return d.x
         })
         .attr("y", function(d) {
-            return d.y + Math.log(d.size) + 10
+            return d.y + r + 8
         })
         .attr("visibility", "hidden")
 
     simValues
         .attr("x", function(d) {
-            if (Math.abs(d.target.y - d.source.y) > 50) {
+            if (Math.abs(d.target.y - d.source.y) > (150 - d.similarity)/0.5) {
                 return d.source.x + (d.target.x - d.source.x)/2 + 7;
             } 
             else {
@@ -145,7 +179,7 @@ function ticked() {
             }
         })
         .attr("y", function(d) {
-            if (Math.abs(d.target.y - d.source.y) < 50) {
+            if (Math.abs(d.target.y - d.source.y) < (150 - d.similarity)/0.5) {
                 return d.source.y + (d.target.y - d.source.y)/2 + 7;
             } 
             else {

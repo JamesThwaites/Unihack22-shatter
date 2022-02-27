@@ -248,6 +248,6 @@ def compareSubList(sub_list):
         json.dump(obj1, nodes)
     
     
-#compareSubList('fantasy,books,scifi')
+compareSubList('announcements,Art,AskReddit,askscience,aww,blog,books,creepy,dataisbeautiful,DIY,Documentaries,EarthPorn,explainlikeimfive,funny,Futurology,gadgets,gaming,GetMotivated,gifs,history,IAmA,InternetIsBeautiful,Jokes,LifeProTips,listentothis,mildlyinteresting,movies,Music,news,nottheonion,OldSchoolCool,personalfinance,philosophy,photoshopbattles,pics,science,showerthoughts,space,sports,television,tifu,todayilearned,UpliftingNews,videos,worldnews'.lower())
     
-compareSubList(gen_random_subs.gen(20))
+#compareSubList(gen_random_subs.gen(20))
